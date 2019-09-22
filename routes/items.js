@@ -34,7 +34,6 @@ router.post('/create', (req, res) => {
 
 //DELETE AN ITEM
 router.post('/delete/:item', (req, res) => {
-    console.log('WE ARE INSIDE THE DELETE ITEM FUNCTION!');
     let db = new sqlite3.Database('./words.db', sqlite3.OPEN_READWRITE, (err) => {
         if (err) {
             return console.error(err.message);
