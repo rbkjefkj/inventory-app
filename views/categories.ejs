@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Category</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>    
+        #FUNNAME:nth-child(odd) {
+            background: ghostwhite;
+        }
+        #FUNNAME:nth-child(even) {
+            background: lavenderblush;
+        }
+        #currentitem:hover {
+            background-color: cornflowerblue !important;
+            color: white !important; 
+        }     
+        #testid, #testid h2 {
+            margin: 20px 0 5px 0;
+        }   
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative&display=swap" rel="stylesheet">    
+</head>
+<body>
+    <h1 id="Lauren">🐌️🌻️<%= name %>🏹️❇️</h1>
+    <p><%= description %></p>
+
+    <form action="/items/create" method="post">
+        <fieldset>
+            <legend style="color: red; font-size: 20px;">NEW ITEM:</legend>
+            Item name:<br>
+            <input name="newitemname" type="text" required><br>
+            Item description:<br>
+            <input name="newitemdesc" type="text" required><br>
+            <input name="itemcategory" type="hidden" id="something">
+            Price:<br>
+            <input name="newitemprice" type="number" required><br>
+            Number of items in stock:<br>
+            <input name="newitemsinstock" type="number" required><br>        
+            <input value="DONE!" type="submit">
+        </fieldset>
+    </form>
+    
+    <button onclick="showEdit()">EDIT CATEGORY</button>
+    <h2 style="color: #05734D" id="testid" style="padding-bottom: 0; margin: 0 0 0 0;">AVAILABLE ITEMS</h2>    
+    <div id="editwindow" style="background-color: lavenderblush; width: 50%; display: none; justify-content: center; margin=0;">
+        <form id="editform" method="post" action="/categories/edit/<%= name %>">
+            <fieldset>
+            <legend style="font-size: 20px;">EDIT CATEGORY:</legend>
+            Category name:<br>
+            <input name="catname" type="text" required style="font-family: Georgia" value="<%= name %>"><br>
+            Category description:<br>
+            <textarea form="editform" name="desc" required="required" rows="10" cols="50" style="font-family: Georgia"><%= description %></textarea><br>
+            <input value="SUBMIT CHANGES" type="submit">
+            </fieldset>
+        </form>
+    </div>
+    <div id="itemslist" style="background-color: ghostwhite; width: 100%; display: flex; flex-direction: column; justify-content: flex-start;">
+        <% for(let i = 0; i < itemsarr.length; i++) { %>
+        <div id="FUNNAME" style="display: flex; flex-direction: row; margin: auto; width: 100%;">                                                           
+        <form method="get" action="/items/<%=itemsarr[i]%>" style="position: relative; display: flex;">
+            <button type="submit" id="currentitem" style="transition: 0.2s; width: 150px; background: antiquewhite; font-family: 'Cinzel Decorative', cursive; font-weight: 700; color: peru; padding: 5px; border: none;"><%= itemsarr[i] %></button>           
+        </form> 
+        <form id ="deleterform" method="post" style="margin: 0 0 0 auto; display: flex; position: relative;">
+            <input type="submit" name="deleter" value="DELETE" style="background: Orangered; color: white; font-family: 'Cinzel Decorative', cursive; font-weight: 700; padding: 5px; border-width: 0px 0px 10px 6px; border-color: red;">
+            <input type='hidden' id='Madison' name='Gladison'>
+        </form>
+        </div>
+    <% } %>        
+    </div>
+<script>
+    var hiddenvalue = document.getElementById('Lauren').innerHTML;
+    document.getElementById("something").value = hiddenvalue;
+
+    var currentitem = document.getElementById('currentitem').innerHTML;
+    document.getElementById("deleterform").action = `/items/delete/${currentitem}`;
+    document.getElementById("Madison").value = `${hiddenvalue}`;
+
+    function showEdit() {
+        var x = document.getElementById("editwindow");
+        var y = document.getElementById("categorylist");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    </script>
+</body>
+</html>

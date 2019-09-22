@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>    
+        #FUNNAME:nth-child(odd) {
+            background: ghostwhite;
+        }
+        #FUNNAME:nth-child(even) {
+            background: lavenderblush;
+        }
+
+        #obeyme:hover {
+        background-color: cornflowerblue !important;
+        color: white !important; 
+        }        
+
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <h1 style="flex: none;">🌐️🥐️ LA PATISSERIE: INVENTORY APP 🐠️☯️</h1>
+   
+    <form action="/categories/create" method="post">
+        <fieldset style="width: 100%;;">
+            <legend style="color: red; font-size: 20px;">NEW CATEGORY:</legend>
+            Category name:<br>
+            <input name="name" type="text" required><br>
+            Category description:<br>
+            <input name="desc" type="text" required><br>
+            <input value="DONE!" type="submit">
+        </fieldset>
+    </form>
+
+    <h2 style="color: #05734D" id="testid">EXISTING CATEGORIES</h2> 
+    <div id="container" style="display: flex;">
+    <div id="categorylist" style="background-color: ghostwhite; width: 100%; display: flex; flex-direction: column; justify-content: flex-start;">   
+    <% for(let i = 0; i < visual.length; i++) { %>
+
+        <div id="FUNNAME" style="display: flex; flex-direction: row; margin: auto; width: 100%;">                                                           
+        <form action="/categories/<%= visual[i]%>" id="THIRDFUNNAME" style="position: relative; display: flex;">
+            <button id="obeyme" type="submit" name="butt" style="transition: 0.2s; width: 100px; background: antiquewhite; font-family: 'Cinzel Decorative', cursive; font-weight: 700; color: peru; padding: 5px; border: none;"><b><%= visual[i] %></b></button>           
+        </form> 
+        <form method="get" action="/categories/delete/<%= visual[i]%>" id="ANOTHERFUNNAME" style="margin: 0 0 0 auto; display: flex; position: relative;">
+            <input type="submit" name="deleter" value="DELETE" style="background: Orangered; color: white; font-family: 'Cinzel Decorative', cursive; font-weight: 700; padding: 5px; border-width: 0px 0px 10px 6px; border-color: red;">
+        </form>
+        <br>
+        <!--<form method="get" action="/edit/<%= visual[i]%>">
+            <input type="submit" name="editor" value="EDIT" onclick="showEdit()">
+        </form>-->
+        </div>
+
+    <% } %>
+    </div>
+
+    <div id="editwindow" style="background-color: lavenderblush; width: 50%; display: none; justify-content: center;">
+        <form id="editform" action="/categories/edit" method="post">
+            <fieldset>
+            <legend style="font-size: 20px;">EDIT CATEGORY:</legend>
+            Category name:<br>
+            <input id="catnameinput" name="name" type="text" required style="font-family: Georgia;"><br>
+            Category description:<br>
+            <textarea name="desc" required type="text" style="width:300px; height: 250px;">STUFF FROM DATABASE</textarea><br>
+            <input value="SUBMIT CHANGES" type="submit">
+            </fieldset>
+        </form>
+    </div>
+</div>
+</div>
+<script>
+    function showEdit() {
+        var x = document.getElementById("editwindow");
+        var y = document.getElementById("categorylist");
+
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    </script>
+</body>
+</html>    
+
+<!--<h1>THIS IS THE WORD FROM DATABASE: <%= visual %>!</h1>-->
+    <!--LOOPS OVER AN ARRAY THAT'S DEFINED IN index.js AND DISPLAYS EACH ITEM AS A <li> 
+    <% for(let i = 0; i < visual.length; i++) { %>
+        <ul>
+            <li><%= visual[i] %></li>
+        </ul>
+    <% } %>
+    -->    
+<!--<form action="/" method="post"> <!--Never use GET in 'method' to send sensitive data! (will be visible in the URL)
+        <input name="word" type="text">
+        <input type="submit" value="I have the word!" class="btn btn-primary btn-block">
+    </form>-->
