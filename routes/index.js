@@ -32,49 +32,7 @@ router.get('/', function(req, res, next) {
         }
     });
 });
-//ROUTERS PERTAINING TO ITEMS START HERE======================================================================================================================================================
-/*//CREATE A NEW ITEM
-router.post('/createitem', (req, res) => {
-    
-    let newitemname = "'" + req.body.newitemname + "'";
-    let newitemdesc = "'" + req.body.newitemdesc + "'";
-    let newitemcat = "'" + req.body.itemcategory + "'";
-    let newitemprice = req.body.newitemprice;
-    let newitemsinstock = req.body.newitemsinstock;  
 
-    let db = new sqlite3.Database('./words.db', sqlite3.OPEN_READWRITE, (err) => {
-        if (err) {
-            return console.error(err.message);
-        }
-    });
-    let sql = `INSERT INTO items VALUES (${newitemname},${newitemdesc},${newitemcat},${newitemprice},${newitemsinstock})`;
-    db.run(sql, function(err){
-            if (err) {
-                return console.log(err.message);
-            }
-        }); 
-    db.close();
-    res.end();
-})
-
-//DELETE AN ITEM
-router.get('/:item', (req, res) => {
-    let db = new sqlite3.Database('./words.db', sqlite3.OPEN_READWRITE, (err) => {
-        if (err) {
-            return console.error(err.message);
-        }
-    });
-    let deleteThis = "'" + req.params.item + "'";
-    let returnTo = req.params.category;    
-
-    db.run(`DELETE FROM items WHERE name = ` + deleteThis, function(err) {    ///////HOW TO USE ? INSTEAD OF : FOR VARIABLES
-        if (err) {
-            return console.error(err.message);
-        } console.log(`Successfuly deleted item with the name of ${deleteThis}`);
-    });
-    db.close();   
-    res.redirect(`../categories/${returnTo}`);
-});*/
 //RANDOM TEST PAGES==========================================================================================================================================================================
 //POST a random  word
 router.post('/', function(req, res, next) {
