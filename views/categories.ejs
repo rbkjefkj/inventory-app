@@ -24,7 +24,7 @@
     <h1 id="Lauren">🐌️🌻️<%= name %>🏹️❇️</h1>
     <p><%= description %></p>
 
-    <form action="/items/create" method="post">
+    <form action="/items/create" method="post" autocomplete="off">
         <fieldset>
             <legend style="color: red; font-size: 20px;">NEW ITEM:</legend>
             Item name:<br>
@@ -43,7 +43,7 @@
     <button onclick="showEdit()">EDIT CATEGORY</button>
     <h2 style="color: #05734D" id="testid" style="padding-bottom: 0; margin: 0 0 0 0;">AVAILABLE ITEMS</h2>    
     <div id="editwindow" style="background-color: lavenderblush; width: 50%; display: none; justify-content: center; margin=0;">
-        <form id="editform" method="post" action="/categories/edit/<%= name %>">
+        <form id="editform" method="post" action="/categories/edit/<%= name %>" autocomplete="off">
             <fieldset>
             <legend style="font-size: 20px;">EDIT CATEGORY:</legend>
             Category name:<br>
